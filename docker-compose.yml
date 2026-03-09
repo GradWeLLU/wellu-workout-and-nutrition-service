@@ -1,0 +1,43 @@
+services:
+
+  workout-db:
+    image: postgres:14
+    container_name: workout_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: workout
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: workout_nutrition
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U workout -d workout_nutrition"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  workout-and-nutrition-service:
+    build: .
+    container_name: workout-and-nutrition-service
+    image: wellu-workout-nutrition-service
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+
+    env_file:
+      - .env
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://workout-db:5432/workout_nutrition
+      SPRING_DATASOURCE_USERNAME: workout
+      SPRING_DATASOURCE_PASSWORD: password
+
+    depends_on:
+      workout-db:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
