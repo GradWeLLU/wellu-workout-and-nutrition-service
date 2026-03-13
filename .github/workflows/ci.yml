@@ -9,6 +9,21 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: workout_nutrition
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,16 +35,5 @@ jobs:
           java-version: 21
           cache: maven
 
-      - name: Build project
-        run: mvn -B clean package
-
-      - name: Run tests
-        run: mvn test
-
-      - name: Publish Test Report
-        if: always()
-        uses: dorny/test-reporter@v1
-        with:
-          name: Maven Tests
-          path: target/surefire-reports/*.xml
-          reporter: java-junit
+      - name: Build and run tests
+        run: mvn -B verify
