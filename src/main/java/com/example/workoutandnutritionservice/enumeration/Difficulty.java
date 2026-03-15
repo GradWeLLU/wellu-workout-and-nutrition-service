@@ -1,6 +1,6 @@
 package com.example.workoutandnutritionservice.enumeration;
 
-public enum ExerciseDifficulty {
+public enum Difficulty {
     EASY,
     INTERMEDIATE,
     HARD

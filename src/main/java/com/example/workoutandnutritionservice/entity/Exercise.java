@@ -1,6 +1,6 @@
 package com.example.workoutandnutritionservice.entity;
 
-import com.example.workoutandnutritionservice.enumeration.ExerciseDifficulty;
+import com.example.workoutandnutritionservice.enumeration.Difficulty;
 import com.example.workoutandnutritionservice.enumeration.ExerciseType;
 import com.example.workoutandnutritionservice.enumeration.MuscleGroup;
 import jakarta.persistence.*;
@@ -50,7 +50,7 @@ public class Exercise {
     private int reps;
 
     @Enumerated(EnumType.STRING)
-    private ExerciseDifficulty difficulty;
+    private Difficulty difficulty;
 
     @Column(name = "video_url")
     private String videoURL;
