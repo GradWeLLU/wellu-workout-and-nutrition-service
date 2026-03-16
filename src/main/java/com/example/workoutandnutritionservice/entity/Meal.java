@@ -6,28 +6,29 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
-@Table(name="meal")
+@Table(name="meals")
 public class Meal {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
     private UUID id;
 
+    @Column(name="meal_type")
     private String mealType;
 
     @Positive
+    @Column(name = "total_calories")
     private int totalCalories;
 
-    @Column(columnDefinition = "jsonb")
+    @Column(name = "total_macros",columnDefinition = "jsonb")
     private String totalMacros;
 
-    @Column(columnDefinition = "jsonb")
+    @Column(name="total_micros",columnDefinition = "jsonb")
     private String totalMicros;
 
     @ManyToOne

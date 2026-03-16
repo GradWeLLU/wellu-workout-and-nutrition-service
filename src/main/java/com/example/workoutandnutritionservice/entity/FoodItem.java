@@ -16,22 +16,24 @@ public class FoodItem {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "food_name",nullable = false)
     private String foodName;
 
+    @Column(name="food_category")
     private String foodCategory;
 
     @Positive
+    @Column(name = "calories")
     private int calories;
 
-    @Column(columnDefinition = "jsonb")
+    @Column(name = "macros",columnDefinition = "jsonb")
     private String macros;
 
-    @Column(columnDefinition = "jsonb")
+    @Column(name = "micros",columnDefinition = "jsonb")
     private String micros;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "meal_id")
     private Meal meal;
 
 
