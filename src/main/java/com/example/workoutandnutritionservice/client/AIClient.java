@@ -1,25 +1,14 @@
 package com.example.workoutandnutritionservice.client;
 
+import com.example.workoutandnutritionservice.dto.AIResponseDTO;
+import com.example.workoutandnutritionservice.dto.WorkoutPlanDTO;
 import com.example.workoutandnutritionservice.dto.WorkoutRequestDTO;
-import com.example.workoutandnutritionservice.entity.WorkoutPlan;
-import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
 
-@Component
-public class AIClient {
+@FeignClient(name = "ai-client", url = "http://host.docker.internal:8000")
+public interface AIClient {
 
-    private final WebClient webClient;
-
-    public AIClient(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build();
-    }
-
-    public Mono<WorkoutPlan> generateWorkout(WorkoutRequestDTO requestDTO) {
-        return webClient.post()
-                .uri("/generate-workout")
-                .bodyValue(requestDTO)
-                .retrieve()
-                .bodyToMono(WorkoutPlan.class);
-    }
+    @PostMapping("/generate-workout")
+    AIResponseDTO generateWorkout(WorkoutRequestDTO requestDTO);
 }
