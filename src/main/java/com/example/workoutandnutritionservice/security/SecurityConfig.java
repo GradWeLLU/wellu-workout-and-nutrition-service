@@ -1,4 +1,4 @@
-package com.example.workoutandnutritionservice.Security;
+package com.example.workoutandnutritionservice.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +15,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/health").permitAll()
                 .requestMatchers("/test/**").permitAll()// allow health endpoint
+                .requestMatchers("/workouts/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic(); // optional
