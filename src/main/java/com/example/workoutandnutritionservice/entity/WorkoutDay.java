@@ -22,13 +22,11 @@ public class WorkoutDay {
     private UUID id;
 
     @Column(nullable = false)
-    private int dayNumber;
+    private String day;
 
-    @Column(length = 255)
-    private String title;
 
-    @Column(length = 1000)
-    private String description;
+    @Column(nullable = false)
+    private String focus;
 
     @ManyToMany
     @JoinTable(

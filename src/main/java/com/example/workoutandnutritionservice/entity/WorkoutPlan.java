@@ -27,10 +27,7 @@ public class WorkoutPlan {
     private UUID userId;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(length = 1000)
-    private String description;
+    private String weeklySplit;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class WorkoutGenerationController {
     private final WorkoutGenerationService workoutGenerationService;
-    @PostMapping("/workouts/generate")
+    @PostMapping("/generate")
     public ResponseEntity<AIResponseDTO> generateWorkout(@RequestHeader("Authorization") String JwtToken){
         return workoutGenerationService.generateWorkout(JwtToken);
     }
