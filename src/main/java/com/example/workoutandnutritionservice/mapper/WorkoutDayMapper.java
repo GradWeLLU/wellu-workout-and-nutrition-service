@@ -5,7 +5,9 @@ import com.example.workoutandnutritionservice.entity.WorkoutDay;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = ExerciseMapper.class) // Use ExerciseMapper for nested list
+@Mapper(
+        componentModel = "spring",
+        uses = ExerciseMapper.class) // Use ExerciseMapper for nested list
 public interface WorkoutDayMapper {
 
     WorkoutDayMapper INSTANCE = Mappers.getMapper(WorkoutDayMapper.class);

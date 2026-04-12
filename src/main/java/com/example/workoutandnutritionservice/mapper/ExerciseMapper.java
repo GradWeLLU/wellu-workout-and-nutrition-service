@@ -5,7 +5,7 @@ import com.example.workoutandnutritionservice.entity.Exercise;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ExerciseMapper {
 
     ExerciseMapper INSTANCE = Mappers.getMapper(ExerciseMapper.class);
