@@ -28,8 +28,6 @@ public class Exercise {
     @Column(nullable = false)
     private String name;
 
-    @Column(length = 1000)
-    private String description;
 
     // Multi-muscle support
     @ElementCollection(targetClass = MuscleGroup.class)
@@ -47,7 +45,7 @@ public class Exercise {
 
     private int sets;
 
-    private int reps;
+    private String reps;
 
     @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
