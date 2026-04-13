@@ -6,7 +6,7 @@ public record NutritionRequestDTO(
         String goal,
         Double weight,
         Double height,
-        int age,
+        Integer age,
         String gender,
         @JsonProperty("activity_level")
         String activityLevel,

@@ -11,6 +11,6 @@ public interface AIClient {
     @PostMapping("/generate-workout")
     AIResponseDTO generateWorkout(WorkoutRequestDTO requestDTO);
 
-    @PostMapping("/generate-nutirtion")
-    NutritionPlanDTO generateNutrition(NutritionRequestDTO nutritionRequestDTO);
+    @PostMapping("/generate-nutrition")
+    NutritionResponseDTO generateNutrition(NutritionRequestDTO nutritionRequestDTO);
 }

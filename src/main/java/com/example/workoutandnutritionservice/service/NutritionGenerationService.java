@@ -4,6 +4,7 @@ import com.example.workoutandnutritionservice.client.AIClient;
 import com.example.workoutandnutritionservice.client.UserClient;
 import com.example.workoutandnutritionservice.dto.NutritionPlanDTO;
 import com.example.workoutandnutritionservice.dto.NutritionRequestDTO;
+import com.example.workoutandnutritionservice.dto.NutritionResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class NutritionGenerationService {
     private final UserClient userClient;
     private final AIClient aIClient;
 
-    public ResponseEntity<NutritionPlanDTO> generateNutrition(String jwtToken){
+    public ResponseEntity<NutritionResponseDTO> generateNutrition(String jwtToken){
         NutritionRequestDTO userDetails = fetchUserDetails(jwtToken);
         return ResponseEntity.ok(fetchNutritionPlan(userDetails));
     }
@@ -22,7 +23,7 @@ public class NutritionGenerationService {
     public NutritionRequestDTO fetchUserDetails(String jwtToken){
         return userClient.getNutritionDetails(jwtToken);
     }
-    public NutritionPlanDTO fetchNutritionPlan(NutritionRequestDTO userDetails){
+    public NutritionResponseDTO fetchNutritionPlan(NutritionRequestDTO userDetails){
         return aIClient.generateNutrition(userDetails);
     }
 }

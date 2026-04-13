@@ -16,6 +16,7 @@ public class SecurityConfig {
                 .requestMatchers("/health").permitAll()
                 .requestMatchers("/test/**").permitAll()// allow health endpoint
                 .requestMatchers("/workouts/**").permitAll()
+                .requestMatchers(("/nutrition/**")).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic(); // optional
