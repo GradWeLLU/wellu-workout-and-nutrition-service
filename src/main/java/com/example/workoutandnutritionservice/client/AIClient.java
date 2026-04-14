@@ -1,9 +1,7 @@
 package com.example.workoutandnutritionservice.client;
 
 import com.example.workoutandnutritionservice.config.FeignConfig;
-import com.example.workoutandnutritionservice.dto.AIResponseDTO;
-import com.example.workoutandnutritionservice.dto.WorkoutPlanDTO;
-import com.example.workoutandnutritionservice.dto.WorkoutRequestDTO;
+import com.example.workoutandnutritionservice.dto.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -12,4 +10,7 @@ public interface AIClient {
 
     @PostMapping("/generate-workout")
     AIResponseDTO generateWorkout(WorkoutRequestDTO requestDTO);
+
+    @PostMapping("/generate-nutrition")
+    NutritionResponseDTO generateNutrition(NutritionRequestDTO nutritionRequestDTO);
 }
