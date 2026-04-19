@@ -2,9 +2,10 @@ package com.example.workoutandnutritionservice.service;
 
 import com.example.workoutandnutritionservice.client.AIClient;
 import com.example.workoutandnutritionservice.client.UserClient;
-import com.example.workoutandnutritionservice.dto.NutritionPlanDTO;
 import com.example.workoutandnutritionservice.dto.NutritionRequestDTO;
 import com.example.workoutandnutritionservice.dto.NutritionResponseDTO;
+import com.example.workoutandnutritionservice.dto.UserNutritionPlanDetailsDTO;
+import com.example.workoutandnutritionservice.mapper.NutritionMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,16 @@ public class NutritionGenerationService {
     private final AIClient aIClient;
 
     public ResponseEntity<NutritionResponseDTO> generateNutrition(String jwtToken){
-        NutritionRequestDTO userDetails = fetchUserDetails(jwtToken);
-        return ResponseEntity.ok(fetchNutritionPlan(userDetails));
+        UserNutritionPlanDetailsDTO userDetails = fetchUserDetails(jwtToken);
+        NutritionRequestDTO nutritionRequest = NutritionMapper.toNutritionRequest(userDetails);
+        return ResponseEntity.ok(fetchNutritionPlan(nutritionRequest));
     }
 
-    public NutritionRequestDTO fetchUserDetails(String jwtToken){
+    public UserNutritionPlanDetailsDTO fetchUserDetails(String jwtToken){
         return userClient.getNutritionDetails(jwtToken);
     }
-    public NutritionResponseDTO fetchNutritionPlan(NutritionRequestDTO userDetails){
-        return aIClient.generateNutrition(userDetails);
+
+    public NutritionResponseDTO fetchNutritionPlan(NutritionRequestDTO nutritionRequest){
+        return aIClient.generateNutrition(nutritionRequest);
     }
 }
