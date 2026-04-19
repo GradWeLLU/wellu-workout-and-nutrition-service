@@ -15,7 +15,7 @@ public class TestController {
     private final AIClient aIClient;
 
     @GetMapping("/user")
-    public WorkoutRequestDTO testUserClient(@RequestHeader("Authorization") String jwtToken){
+    public UserWorkoutPlanDetailsDTO testUserClient(@RequestHeader("Authorization") String jwtToken){
         return userClient.getWorkoutDetails(jwtToken);
     }
     @PostMapping("/generate")

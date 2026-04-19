@@ -1,5 +1,8 @@
 package com.example.workoutandnutritionservice.service;
 
+import com.example.workoutandnutritionservice.dto.UserWorkoutPlanDetailsDTO;
+import com.example.workoutandnutritionservice.mapper.WorkoutMapper;
+import org.wellu.common.security.JwtService;
 import com.example.workoutandnutritionservice.client.AIClient;
 import com.example.workoutandnutritionservice.client.UserClient;
 import com.example.workoutandnutritionservice.dto.AIResponseDTO;
@@ -12,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class WorkoutGenerationService {
@@ -21,14 +26,17 @@ public class WorkoutGenerationService {
     private final WorkoutPlanRepository workoutPlanRepository;
 
     public ResponseEntity<AIResponseDTO> generateWorkout(String JwtToken){
-        WorkoutRequestDTO userDetails = fetchUserDetails(JwtToken);
-        AIResponseDTO aiReply = fetchWorkoutPlan(userDetails);
+        UserWorkoutPlanDetailsDTO userDetails = fetchUserDetails(JwtToken);
+        UUID userID = userDetails.userID();
+        WorkoutRequestDTO workoutRequest = WorkoutMapper.toWorkoutRequest(userDetails);
+        AIResponseDTO aiReply = fetchWorkoutPlan(workoutRequest);
         WorkoutPlanDTO planDTO = aiReply.workoutPlan();
         WorkoutPlan plan = workoutPlanMapper.toEntity(planDTO);
+        plan.setUserId(userID);
         workoutPlanRepository.save(plan);
         return ResponseEntity.ok(aiReply);
     }
-    private WorkoutRequestDTO fetchUserDetails(String JwtToken){
+    private UserWorkoutPlanDetailsDTO fetchUserDetails(String JwtToken){
         System.out.println(userClient.getWorkoutDetails(JwtToken));
         return userClient.getWorkoutDetails(JwtToken);
     }
