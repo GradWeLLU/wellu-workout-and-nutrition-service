@@ -37,7 +37,7 @@ public class WorkoutGenerationService {
         return ResponseEntity.ok(aiReply);
     }
     private UserWorkoutPlanDetailsDTO fetchUserDetails(String JwtToken){
-        System.out.println(userClient.getWorkoutDetails(JwtToken));
+        //System.out.println(userClient.getWorkoutDetails(JwtToken));
         return userClient.getWorkoutDetails(JwtToken);
     }
     private AIResponseDTO fetchWorkoutPlan(WorkoutRequestDTO userDetails){

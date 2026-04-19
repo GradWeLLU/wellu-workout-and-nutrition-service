@@ -1,9 +1,7 @@
 package com.example.workoutandnutritionservice.client;
 
-import com.example.workoutandnutritionservice.dto.NutritionRequestDTO;
+import com.example.workoutandnutritionservice.dto.UserNutritionPlanDetailsDTO;
 import com.example.workoutandnutritionservice.dto.UserWorkoutPlanDetailsDTO;
-import com.example.workoutandnutritionservice.dto.WorkoutRequestDTO;
-import org.apache.catalina.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -15,6 +13,6 @@ public interface UserClient {
     @GetMapping("/user/request-workout-details")
     UserWorkoutPlanDetailsDTO getWorkoutDetails(@RequestHeader("Authorization") String jwtToken);
 
-    @GetMapping("/profile/me")
-    NutritionRequestDTO getNutritionDetails(@RequestHeader("Authorization") String jwtToken);
+    @GetMapping("/user/request-nutrition-details")
+    UserNutritionPlanDetailsDTO getNutritionDetails(@RequestHeader("Authorization") String jwtToken);
 }

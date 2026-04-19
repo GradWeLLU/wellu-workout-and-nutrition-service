@@ -1,12 +1,8 @@
 package com.example.workoutandnutritionservice.controller;
 
-import com.example.workoutandnutritionservice.dto.AIResponseDTO;
-import com.example.workoutandnutritionservice.dto.NutritionPlanDTO;
-import com.example.workoutandnutritionservice.dto.NutritionRequestDTO;
 import com.example.workoutandnutritionservice.dto.NutritionResponseDTO;
 import com.example.workoutandnutritionservice.service.NutritionGenerationService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
