@@ -6,5 +6,9 @@ public enum MuscleGroup {
     ARMS,
     CORE,
     LEGS,
-    SHOULDERS
+    SHOULDERS,
+    HIPS,
+    QUADS,
+    HAMSTRINGS,
+    TRAPS
 }

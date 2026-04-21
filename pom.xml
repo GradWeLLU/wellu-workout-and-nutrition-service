@@ -10,12 +10,19 @@
         <version>3.4.5</version>
         <relativePath/>
     </parent>
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <groupId>com.example</groupId>
     <artifactId>workout-and-nutrition-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>workout-and-nutrition-service</name>
     <description>Workout and Nutrition Service</description>
+
 
     <properties>
         <java.version>21</java.version>
@@ -35,6 +42,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.GradWeLLU</groupId>
+            <artifactId>common-lib</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
