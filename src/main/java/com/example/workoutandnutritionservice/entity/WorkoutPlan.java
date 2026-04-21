@@ -1,6 +1,7 @@
 package com.example.workoutandnutritionservice.entity;
 
 import com.example.workoutandnutritionservice.enumeration.Difficulty;
+import com.example.workoutandnutritionservice.enumeration.PlanStatus;
 import com.example.workoutandnutritionservice.enumeration.PlanType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,10 @@ public class WorkoutPlan {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Difficulty difficulty;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PlanStatus status;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "workout_plan_id")

@@ -1,6 +1,7 @@
 package com.example.workoutandnutritionservice.service;
 
 import com.example.workoutandnutritionservice.dto.UserWorkoutPlanDetailsDTO;
+import com.example.workoutandnutritionservice.enumeration.PlanStatus;
 import com.example.workoutandnutritionservice.mapper.WorkoutMapper;
 import org.wellu.common.security.JwtService;
 import com.example.workoutandnutritionservice.client.AIClient;
@@ -33,6 +34,7 @@ public class WorkoutGenerationService {
         WorkoutPlanDTO planDTO = aiReply.workoutPlan();
         WorkoutPlan plan = workoutPlanMapper.toEntity(planDTO);
         plan.setUserId(userID);
+        plan.setStatus(PlanStatus.INACTIVE);
         workoutPlanRepository.save(plan);
         return ResponseEntity.ok(aiReply);
     }
