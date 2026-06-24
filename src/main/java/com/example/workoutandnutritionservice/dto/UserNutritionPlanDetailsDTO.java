@@ -1,5 +1,6 @@
 package com.example.workoutandnutritionservice.dto;
 
+import java.util.List;
 import java.util.UUID;
 
 public record UserNutritionPlanDetailsDTO(
@@ -12,6 +13,8 @@ public record UserNutritionPlanDetailsDTO(
         String activityLevel,
         String budget,
         String diet,
-        int mealsPerDay
+        int mealsPerDay,
+        List<String> medications,
+        List<String> allergies
 ) {
 }

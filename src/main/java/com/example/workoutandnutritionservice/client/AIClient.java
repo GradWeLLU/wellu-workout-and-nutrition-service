@@ -13,4 +13,7 @@ public interface AIClient {
 
     @PostMapping("/generate-nutrition")
     NutritionResponseDTO generateNutrition(NutritionRequestDTO nutritionRequestDTO);
+
+    @PostMapping("/generate-plan")
+    CombinedPlanResponseDTO generatePlan(CombinedPlanRequestDTO requestDTO);
 }

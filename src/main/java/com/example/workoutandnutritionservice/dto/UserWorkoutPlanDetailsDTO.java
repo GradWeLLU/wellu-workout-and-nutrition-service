@@ -16,6 +16,6 @@ public record UserWorkoutPlanDetailsDTO(
         String preferredDifficultyLevel,
         List<String> preferredEquipment,
         String experienceLevel,
-        List<String> injuries                // optional
+        List<String> injuries
 ) {
 }
