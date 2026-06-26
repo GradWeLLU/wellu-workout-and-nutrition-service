@@ -1,6 +1,7 @@
 package com.example.workoutandnutritionservice.service;
 
 import com.example.workoutandnutritionservice.dto.ApiMessageResponse;
+import com.example.workoutandnutritionservice.dto.NutritionPlanPatchRequestDTO;
 import com.example.workoutandnutritionservice.dto.NutritionPlanResponseDTO;
 import com.example.workoutandnutritionservice.entity.NutritionPlan;
 import com.example.workoutandnutritionservice.enumeration.PlanStatus;
@@ -81,6 +82,32 @@ public class NutritionPlanService {
         if (!plan.getUserId().equals(userId)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+
+        return ResponseEntity.ok(nutritionPlanResponseMapper.toDTO(plan));
+    }
+
+    @Transactional
+    public ResponseEntity<NutritionPlanResponseDTO> patchPlan(UUID planId, UUID userId, NutritionPlanPatchRequestDTO request) {
+        NutritionPlan plan = nutritionPlanRepository.findById(planId)
+                .orElse(null);
+
+        if (plan == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (!plan.getUserId().equals(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        if (request.goal() != null) {
+            plan.setGoal(request.goal());
+        }
+
+        if (request.dailyCalories() != null) {
+            plan.setDailyCalories(request.dailyCalories());
+        }
+
+        nutritionPlanRepository.save(plan);
 
         return ResponseEntity.ok(nutritionPlanResponseMapper.toDTO(plan));
     }
