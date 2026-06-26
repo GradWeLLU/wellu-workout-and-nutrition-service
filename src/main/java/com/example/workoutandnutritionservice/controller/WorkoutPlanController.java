@@ -2,17 +2,14 @@ package com.example.workoutandnutritionservice.controller;
 
 
 import com.example.workoutandnutritionservice.dto.ApiMessageResponse;
+import com.example.workoutandnutritionservice.dto.WorkoutPlanPatchRequestDTO;
 import com.example.workoutandnutritionservice.dto.WorkoutPlanResponseDTO;
 import com.example.workoutandnutritionservice.security.JwtUserPrincipal;
 import com.example.workoutandnutritionservice.service.WorkoutPlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -43,6 +40,15 @@ public class WorkoutPlanController {
     public ResponseEntity<WorkoutPlanResponseDTO> getPlanById(@PathVariable UUID planId,
                                                               @AuthenticationPrincipal JwtUserPrincipal user) {
         return service.getPlanById(planId, user.getUserId());
+    }
+
+    @PatchMapping("/{planId}")
+    public ResponseEntity<WorkoutPlanResponseDTO> patchPlan(
+            @PathVariable UUID planId,
+            @RequestBody WorkoutPlanPatchRequestDTO request,
+            @AuthenticationPrincipal JwtUserPrincipal user) {
+
+        return service.patchPlan(planId, user.getUserId(), request);
     }
 }
 
